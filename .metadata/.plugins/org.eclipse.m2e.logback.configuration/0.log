@@ -1,0 +1,10 @@
+2021-04-07 18:43:05,435 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-04-07 18:44:13,374 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-04-07 18:45:01,679 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-04-07 18:46:43,119 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-04-07 18:49:30,836 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-04-07 18:50:58,773 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo1.maven.org/maven2/com/saucelabs/quickstart-seleniumrc-junit/2.1.25/quickstart-seleniumrc-junit-2.1.25.jar
+2021-04-07 18:50:58,982 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo1.maven.org/maven2/com/saucelabs/quickstart-seleniumrc-junit/2.1.25/quickstart-seleniumrc-junit-2.1.25.jar
+2021-04-07 18:50:59,237 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo1.maven.org/maven2/com/saucelabs/quickstart-seleniumrc-junit/2.1.25/quickstart-seleniumrc-junit-2.1.25.pom
+2021-04-07 18:50:59,424 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo1.maven.org/maven2/com/saucelabs/quickstart-seleniumrc-junit/2.1.25/quickstart-seleniumrc-junit-2.1.25.pom
+2021-04-07 18:56:25,082 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
