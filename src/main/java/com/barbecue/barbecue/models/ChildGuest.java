@@ -1,52 +1,27 @@
 package com.barbecue.barbecue.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class ChildGuest extends Guest {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
-	private String name;
-	
-	@JsonBackReference
-	@ManyToOne
+	@JsonManagedReference(value = "child")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Guest parent;
 
 	public ChildGuest() {
 	}
 
 	public ChildGuest(int id, String name, Guest parent) {
-		this.id = id;
-		this.name = name;
-		this.parent=parent;
+		this.parent = parent;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-
 
 	public Guest getParent() {
 		return parent;
@@ -56,8 +31,8 @@ public class ChildGuest extends Guest {
 		this.parent = parent;
 	}
 
-	public String play() {
-		return this.name + " joue dans le jardin";
+	public void play() {
+		System.out.println(this.name + " joue dans le jardin sous l'oeil attendri de " + this.parent.getName());
 	}
 
 }

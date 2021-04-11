@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barbecue.barbecue.dao.BarbecueDao;
+import com.barbecue.barbecue.dao.ChildGuestDao;
 import com.barbecue.barbecue.dao.GuestDao;
 import com.barbecue.barbecue.dao.MerguezDao;
 import com.barbecue.barbecue.models.Barbecue;
+import com.barbecue.barbecue.models.ChildGuest;
 import com.barbecue.barbecue.models.Guest;
 import com.barbecue.barbecue.models.Merguez;
 
@@ -30,12 +32,15 @@ public class GuestController {
 	private final GuestDao guestDao;
 	private final BarbecueDao barbecueDao;
 	private final MerguezDao merguezDao;
+	private final ChildGuestDao childGuestDao;
 
 	@Autowired
-	public GuestController(GuestDao guestDao, BarbecueDao barbecueDao, MerguezDao merguezDao) {
+	public GuestController(GuestDao guestDao, BarbecueDao barbecueDao, MerguezDao merguezDao,
+			ChildGuestDao childGuestDao) {
 		this.guestDao = guestDao;
 		this.barbecueDao = barbecueDao;
 		this.merguezDao = merguezDao;
+		this.childGuestDao = childGuestDao;
 	}
 
 	@GetMapping
@@ -60,7 +65,6 @@ public class GuestController {
 		return new ResponseEntity<>(guest, HttpStatus.CREATED);
 	}
 
-//Stratégie de cascade pour effacer
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteGuest(@PathVariable int id) {
 		Guest guest = guestDao.findById(id);
@@ -116,6 +120,31 @@ public class GuestController {
 		barbecueDao.save(barbecue);
 		System.out.println(guest.getName() + " ajoute une merguez. ");
 		return new ResponseEntity<Barbecue>(barbecue, HttpStatus.OK);
+	}
+
+	@PutMapping("/{guestId}/child/{childId}")
+	public ResponseEntity<Guest> bringChildToBarbecue(@PathVariable int guestId, @PathVariable int childId) {
+		Guest guest = guestDao.findById(guestId);
+
+		if (guest == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		ChildGuest child = childGuestDao.findById(childId);
+
+		if (child == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+// Quand guest apporte une merguez, récupération du barbecue de guest, on ajoute
+// une merguez au barbecue et on sauvegarde
+// le barbecue,on dit quel invité ajoute une merguez puis envoi requête
+		child.setParent(guest);
+		guest.setChild(child);
+		child.play();
+		childGuestDao.save(child);
+		guestDao.save(guest);
+		return new ResponseEntity<Guest>(guest, HttpStatus.OK);
 	}
 
 }

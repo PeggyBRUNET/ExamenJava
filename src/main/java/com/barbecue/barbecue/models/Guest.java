@@ -6,8 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Inheritance
@@ -15,13 +17,17 @@ public class Guest {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	protected int id;
 
-	private String name;
+	protected String name;
 
 	@JsonBackReference
 	@ManyToOne
-	private Barbecue barbecue;
+	protected Barbecue barbecue;
+	
+	@JsonBackReference(value="child")
+	@OneToOne
+	private ChildGuest child;
 
 	public Guest() {
 	}
@@ -55,6 +61,14 @@ public class Guest {
 
 	public void setBarbecue(Barbecue barbecue) {
 		this.barbecue = barbecue;
+	}
+	
+	public ChildGuest getChild() {
+		return child;
+	}
+
+	public void setChild(ChildGuest child) {
+		this.child = child;
 	}
 
 	public Guest invite(Guest guest) {

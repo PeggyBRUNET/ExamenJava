@@ -101,7 +101,7 @@ public class HostController {
 		if (host == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		barbecueDao.deleteById(id);
+		hostDao.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
